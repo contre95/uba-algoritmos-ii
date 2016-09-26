@@ -1,0 +1,15 @@
+ TP0
+
+El adjunto tp0.zip contiene varios archivos. Deben editar el archivo tp0.c, completando las 4 funciones que aparecen en el código fuente:  swap(),  maximo(), comparar() y seleccion(). (Los comentarios en el archivo indican qué debe hacer cada función.)
+
+El resto de archivos del zip no los deben modificar. Sí pueden, no obstante, leer el archivo tp0_pruebas.c para entender qué verificaciones realizaremos sobre su código.
+
+La compilación se realiza en el estándar C99 con el máximo de warnings: gcc -g -std=c99 -Wall -Wconversion -Wno-sign-conversion -Werror -o pruebas *.c. Para ejecutar las pruebas: ./pruebas. Deben dar todas OK.
+
+La entrega es el viernes 26 de agosto.  Deben entregar una hoja de papel, con su nombre y padrón, imprimiendo únicamente el archivo tp0.c. 
+
+Además, deben enviar por mail un archivo zip con el código completo¹ a tps.7541rw@gmail.com.  En el asunto deben indicar: TP0 - Padron - Nombre y Apellido.
+
+Como caso excepcional, para este TP0 no se pide informe. Solamente documentación en el código, según sea necesario.
+
+(¹) Es indiferente si incluyen solamente tp0.c en el zip, o el directorio completo del TP
