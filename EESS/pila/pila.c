@@ -31,8 +31,7 @@ void* pila_ver_tope(const pila_t *pila){
         if(pila_esta_vacia(pila)){
             return NULL;
         }
-        return pila->datos[pila->largo];
-
+        return pila->datos[pila->largo-1];
 }
 
 void* pila_desapilar(pila_t *pila){
@@ -40,17 +39,17 @@ void* pila_desapilar(pila_t *pila){
         return NULL;
     }
     if(pila->largo <= pila->tam/4){
-        pila_redimensionar(pila,pila->tam/2);
+        if(!pila_redimensionar(pila,pila->tam/2)) return false;
     }
     pila->largo -= 1;
-    return pila->datos[pila->largo+1];
+    return pila->datos[pila->largo];
 }
 
 bool pila_apilar(pila_t *pila, void* valor){
-    if(pila->largo + 1 >= pila->tam){
-        pila_redimensionar(pila,pila->tam*2);
+    if(pila->largo >= pila->tam){
+        if(!pila_redimensionar(pila,pila->tam*2)) return false;
     }
-    pila->datos[pila->largo+1] = valor;
+    pila->datos[pila->largo] = valor;
     pila->largo += 1;
     return true;
 }
@@ -64,9 +63,9 @@ pila_t* pila_crear(void) {
      }
      pila->largo = 0;
      pila->tam = TAM0;
-     pila->datos = malloc(pila->tam);
+     pila->datos = malloc(pila->tam * sizeof(void*));
 
-     if (pila->tam > 0 && pila->datos == NULL) {
+     if (pila->datos == NULL) {
          free(pila);
          return NULL;
      }

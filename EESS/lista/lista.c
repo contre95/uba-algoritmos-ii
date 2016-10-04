@@ -236,4 +236,3 @@ void lista_iterar(lista_t *lista, bool(*visitar)(void *dato, void *extra), void 
     }
     node_act = node_act->next_node;
 }
-}

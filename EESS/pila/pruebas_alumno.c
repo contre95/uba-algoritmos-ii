@@ -12,6 +12,7 @@ void pruebas_pila_alumno() {
     pila_t* pila_prueba = pila_crear();
     print_test("Puntero inicializado a NULL", ejemplo == NULL);
     print_test("Pila iniciada vacia         ",pila_esta_vacia(pila_prueba));
+    print_test("Pila ver tope               ",pila_ver_tope(pila_prueba)==NULL);
     char a = 'a';
     pila_apilar(pila_prueba, &a);
     print_test("Pila apilar              ",!pila_esta_vacia(pila_prueba));
@@ -23,7 +24,7 @@ void pruebas_pila_alumno() {
     double y = 12.4;
     for (int e = 0 ; e<=1000 ; e++){
         pila_apilar(pila_prueba, &y);
-        print_test("Pila ver tope               ",pila_ver_tope(pila_prueba)==&y);
+        print_test("Pila ver tope (for)     ",pila_ver_tope(pila_prueba)==&y);
     }
     char asd[] = "holaocmoestas";
     pila_apilar(pila_prueba,asd);
@@ -33,4 +34,5 @@ void pruebas_pila_alumno() {
     print_test("Desapilo el vector que apile", pila_ver_tope(pila_prueba)==pila_nueva );
     pila_destruir(pila_desapilar(pila_prueba));
     pila_destruir(pila_prueba);
+
 }
