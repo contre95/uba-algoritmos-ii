@@ -111,7 +111,7 @@ void lista_destruir(lista_t *lista, void destruir_dato(void*)){
     while(act_node){
         node_t * next_node = act_node->next_node;
         if (destruir_dato){
-        destruir_dato(act_node->data);
+            destruir_dato(act_node->data);
         }
         free(act_node);
         act_node = next_node;
@@ -125,20 +125,16 @@ void lista_destruir(lista_t *lista, void destruir_dato(void*)){
 
 
 struct lista_iter{
-
     node_t *prev_node;
     node_t *act_node;
     lista_t *lista;
 };
 
 lista_iter_t* lista_iter_crear(lista_t *lista){
-
     lista_iter_t *lista_iter = malloc(sizeof(lista_iter_t));
-
     if(lista_iter == NULL){
         return NULL;
     }
-
     lista_iter->lista = lista;
     lista_iter->prev_node = NULL;
     lista_iter->act_node = lista->first_node;
@@ -155,7 +151,6 @@ bool lista_iter_avanzar(lista_iter_t *iter){
 }
 
 void *lista_iter_ver_actual(const lista_iter_t *iter){
-
     if(lista_esta_vacia(iter->lista) || lista_iter_al_final(iter)){
         return NULL;
     }
@@ -166,16 +161,11 @@ bool lista_iter_al_final(const lista_iter_t *iter){
     return iter->act_node == NULL;
 }
 
-
 void lista_iter_destruir(lista_iter_t *iter){
     free(iter);
 }
 
-
-
 bool lista_iter_insertar(lista_iter_t *iter, void *dato){
-
-
     if(lista_iter_al_final(iter)){
         iter->prev_node = iter->lista->last_node;
         if(!lista_insertar_ultimo(iter->lista, dato)) return false;
@@ -196,11 +186,9 @@ bool lista_iter_insertar(lista_iter_t *iter, void *dato){
         iter->lista->len++;
         return true;
     }
-
 }
 
 void *lista_iter_borrar(lista_iter_t *iter){
-
     if(lista_esta_vacia(iter->lista)){
         return NULL;
     }
@@ -214,7 +202,6 @@ void *lista_iter_borrar(lista_iter_t *iter){
     if(iter->act_node == iter->lista->last_node) {
         iter->lista->last_node = iter->prev_node;
     }
-
     iter->prev_node->next_node = iter->act_node->next_node;
     void * data_to_delete = iter->act_node->data;
     free(iter->act_node);
@@ -223,6 +210,7 @@ void *lista_iter_borrar(lista_iter_t *iter){
     return data_to_delete;
 
 }
+
 void lista_iterar(lista_t *lista, bool(*visitar)(void *dato, void *extra), void *extra){
 
     node_t * node_act = lista->first_node;
