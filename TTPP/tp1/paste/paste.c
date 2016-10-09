@@ -33,6 +33,7 @@ void error(char *message){
 int main(int argc, char const *argv[]) {
 
     if(argc != 2){
+        printf("%s %i\n","se imprimieron : ", argc);
         error("CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
         return 1;
     }
@@ -47,8 +48,7 @@ int main(int argc, char const *argv[]) {
         fgets(single_line_1,150,file_2);
         fprintf(stdout, "%s\n",single_line_1);
         fprintf(stdout, "%s\n",single_line_2);
-        free(single_line_1);
-        free(single_line_2);
+
     }
 
     return 0;
