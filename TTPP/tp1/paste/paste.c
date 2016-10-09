@@ -21,8 +21,8 @@ $ ./paste anios.txt ciudades.txt
 2013  Lanús
 2016  Nuñez
 2016  Avellaneda*/
-#include <stdio.h>;
-#include <string.h>;
+#include <stdio.h>
+#include <string.h>
 #define SPEARADOR '\t'
 
 void error(char *message){
@@ -32,18 +32,18 @@ void error(char *message){
 int main(int argc, char const *argv[]) {
 
     if(argc != 2){
-        error("CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !")
+        error("CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
         return 1;
     }
 
     char single_line_1[150];
     char single_line_2[150];
-    FILE * file_1 = fopen(argv[1],'r');
-    FILE * file_2 = fopen(argv[2],'r');
+    FILE * file_1 = fopen(argv[1],"r");
+    FILE * file_2 = fopen(argv[2],"r");
 
     while(!feof(file_1) || !feof(file_2)){
-        getline(&single_line_2,150,file_1);
-        getline(&single_line_1,150,file_2);
+        getline(single_line_2,150,file_1);
+        getline(single_line_1,150,file_2);
         fprintf(stout, "%s\n",single_line_1);
         fprintf(stout, "%s\n",single_line_2);
         free(single_line_1);
