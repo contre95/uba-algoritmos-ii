@@ -32,8 +32,13 @@ void error(char *message){
 
 int main(int argc, char const *argv[]) {
 
+    printf("%s %i\n","se imprimieron : ", argc);
+    for(int i=0 ; i<argc ; i++){
+        printf("%s\n",argc[i]);
+    }
+    
     if(argc != 2){
-        printf("%s %i\n","se imprimieron : ", argc);
+
         error("CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
         return 1;
     }
