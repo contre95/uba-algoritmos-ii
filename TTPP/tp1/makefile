@@ -22,6 +22,15 @@ more_run: more
 more_valgrind: more
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more more_tp1/prueba_more.txt 7
 
+dc: dc_tp1/dc.c ../tda/pila/pila.o
+	$(CC) $(CFLAGS) -o dc ../tda/pila/pila.o dc_tp1/dc.c
+
+dc_run: dc
+	echo "2 9 4 + *" | ./dc
+
+dc_valgrind: dc
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more dc_tp1/prueba_more.txt 7
+
 reset:
 	rm paste more
 
