@@ -13,5 +13,8 @@ paste_run: paste
 paste_valgrind: paste
 		valgrind ./paste paste_tp1/fechas.txt paste_tp1/ciudades.txt
 
+reset:
+		rm paste
+		
 remove_vgcore:
 		rm vgcore.*
