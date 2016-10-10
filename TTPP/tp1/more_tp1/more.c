@@ -20,9 +20,8 @@ int main(int argc, char const *argv[]) {
         fgets(single_line_1,1000,file_1);
         fprintf(stdout,"%s",single_line_1);
     }
-    
     char single_line_2[200];
-    while(a = getchar() == '\n' && !feof(file_1)){
+    while(getchar() == '\n' && !feof(file_1)){
         fgets(single_line_2,1000,file_1);
         fprintf(stdout,"%s",strtok(single_line_2,"\n"));
     }
