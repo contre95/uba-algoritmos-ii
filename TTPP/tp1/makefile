@@ -26,13 +26,13 @@ dc: dc_tp1/dc.c tda/pila/pila.o
 	$(CC) $(CFLAGS) -o dc tda/pila/pila.o dc_tp1/dc.c
 
 dc_run: dc
-	echo "2 9 4 + *" | ./dc
+	./dc "2 9 4 + *" "2 3 + 3 *"
 
 dc_valgrind: dc
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more dc_tp1/prueba_more.txt 7
 
 reset:
-	rm paste more
+	rm paste more dc
 
 remove_crap:
 	rm vgcore.* .*.swp .*.swo

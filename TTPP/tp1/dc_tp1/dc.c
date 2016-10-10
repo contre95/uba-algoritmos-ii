@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-enum operat = {"+","-","/","*"};
+#include <ctype.h>
 
 void error(char *message){
     fprintf(stderr, "%s\n", message);
@@ -11,41 +10,68 @@ void error(char *message){
 
 int main(int argc, char const *argv[]) {
 
-    if(argc < 4) return 1;
-
+  //  if(argc < 4) return 1;
     pila_t *pila_polaca = pila_crear();
-    for(int entrada = 1 ; entrada < argc - 2 ; entrada++){
+    for(int entrada = 1 ; entrada < argc ; entrada++){
+      printf("%s\n",argv[entrada]);
         for(int i=0; i < strlen(argv[entrada]) ; i++){
-
-            if(isdigit(argv[entrada][i]){
-                pila_apilar(pila_polaca,&argv[entrada][i]);
-                break;
+            char n = argv[entrada][i];
+          //  printf("%c\n",n);
+            if(isdigit(n)){
+              int  num = atoi(&n);
+              //printf("apilo el resultado : %i\n",num);
+              pila_apilar(pila_polaca,&num);
+              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
             }
+            if(n=='+'){
 
-            switch (operat) {
-                case "*":
-                    int producto = pila_desapilar(pila_polaca) * pila_desapilar(pila_polaca);
-                    pila_apilar(pila_polaca,&producto);
-                    break;
+                //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+                int *num1 = pila_desapilar(pila_polaca);
+                //printf("%i\n",*num1);
+                //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+                int *num2 = pila_desapilar(pila_polaca);
+                //printf("%i\n",*num2);
+                int resultado = *num1 + *num2;
+                //printf("el resultado es : %i\n",resultado );
+                pila_apilar(pila_polaca,&resultado);
 
-                case "/":
-                    int producto = pila_desapilar(pila_polaca) / pila_desapilar(pila_polaca);
-                    pila_apilar(pila_polaca,&producto);
-                    break;
 
-                case "-":
-                    int producto = pila_desapilar(pila_polaca) - pila_desapilar(pila_polaca);
-                    pila_apilar(pila_polaca,&producto);
-                    break;
+          }
+            if(n=='-'){
+              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num1 = *(int*)pila_desapilar(pila_polaca);
+              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num2 = *(int*)pila_desapilar(pila_polaca);
+              int resultado = num1 - num2;
+              //printf("el resultado es : %i\n",resultado );
+              pila_apilar(pila_polaca,&resultado);
 
-                case "+":
-                    int producto = pila_desapilar(pila_polaca) + pila_desapilar(pila_polaca);
-                    pila_apilar(pila_polaca,&producto);
-                    break;
-            }
-        }
-        printf("%i\n",pila_desapilar(pila_polaca) );
+          }
+            if(n=='*'){
+              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num1 = *(int*)pila_desapilar(pila_polaca);
+              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num2 = *(int*)pila_desapilar(pila_polaca);
+              int resultado = num1 * num2;
+              //printf("el resultado es : %i\n",resultado );
+              pila_apilar(pila_polaca,&resultado);
+
+          }
+            if(n=='/'){
+              printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num1 = *(int*)pila_desapilar(pila_polaca);
+              printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
+              int num2 = *(int*)pila_desapilar(pila_polaca);
+              int resultado = num1 / num2;
+              printf("el resultado es : %i\n",resultado );
+              pila_apilar(pila_polaca,&resultado);
+
+          }
+      }
+
+    int resultado_final = *(int*)pila_desapilar(pila_polaca);
+    printf("%i\n",resultado_final);
     }
-
+    pila_destruir(pila_polaca);
     return 0;
 }
