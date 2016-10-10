@@ -2,7 +2,7 @@ EXEC = pruebas
 CC = gcc
 CFLAGS = -Werror -pedantic -std=c99 -g
 
-all: paste
+all: paste more
 
 paste: paste_tp1/paste.c
 		$(CC) $(CFLAGS) -o paste paste_tp1/paste.c
@@ -17,13 +17,13 @@ more: more_tp1/more.c
 		$(CC) $(CFLAGS) -o more more_tp1/more.c
 
 more_run: more
-		./more more_tp1/prueba_more.txt
+		./more more_tp1/prueba_more.txt 7
 
 more_valgrind: more
-	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more more_tp1/prueba_more.txt
+		valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more more_tp1/prueba_more.txt 7
 
 reset:
-		rm paste more
+	rm paste more
 
 remove_crap:
 		rm vgcore.* .*.swp .*.swo
