@@ -32,13 +32,7 @@ void error(char *message){
 
 int main(int argc, char const *argv[]) {
 
-    printf("%s %i\n","se imprimieron : ", argc);
-    for(int i=0 ; i<argc ; i++){
-        printf("%s\n",argv[i]);
-    }
-
-    if(argc != 2){
-
+    if(argc != 3){
         error("CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
         return 1;
     }
@@ -49,12 +43,12 @@ int main(int argc, char const *argv[]) {
     FILE * file_2 = fopen(argv[2],"r");
 
     while(!feof(file_1) || !feof(file_2)){
-        fgets(single_line_2,150,file_1);
-        fgets(single_line_1,150,file_2);
-        fprintf(stdout, "%s\n",single_line_1);
-        fprintf(stdout, "%s\n",single_line_2);
-
+        fgets(single_line_1,150,file_1);
+        fgets(single_line_2,150,file_2);
+        fprintf(stdout,"%s\t%s\n",strtok(single_line_1,"\n"),strtok(single_line_2,"\n"));
     }
+    fclose(file_1);
+    fclose(file_2);
 
     return 0;
 }
