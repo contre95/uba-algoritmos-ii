@@ -14,15 +14,17 @@ int main(int argc, char const *argv[]) {
     }
 
     FILE * file_1 = fopen(argv[1],"r");
-    char single_line_1[200];
+    char single_line_1[1000];
 
-    for(int i=0; i< argv[2] ; i++){
-        fgets(single_line_1,200,file_1);
+    for(int i=0; i < atoi(argv[2]) ; i++){
+        fgets(single_line_1,1000,file_1);
         fprintf(stdout,"%s",single_line_1);
     }
-    whiel(!feof(file_1)){
-        if(getchar() != '\n') break;
-        fgets(single_line_1,200,file_1);
-        fprintf(stdout,"%s",single_line_1);
+    char single_line_2[200];
+    while(getchar() == '\n' && !feof(file_1)){
+        fgets(single_line_2,1000,file_1);
+        fprintf(stdout,"%s",single_line_2);
     }
-    return 1;
+    fclose(file_1);
+    return 0;
+}

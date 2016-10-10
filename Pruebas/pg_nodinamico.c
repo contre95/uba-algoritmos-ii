@@ -5,7 +5,7 @@ int main(int argc, char const *argv[]) {
     if (argc == 1){
         return 1;
     }
-
+    printf("%i\n",atoi(argv[2]));
     int sumas;
     for (int i = 0; i < argc;i++){
         sumas += atoi(argv[i]);
