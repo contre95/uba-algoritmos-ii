@@ -3,17 +3,49 @@
 #include <string.h>
 #include <stdlib.h>
 
+enum operat = {"+","-","/","*"};
+
 void error(char *message){
     fprintf(stderr, "%s\n", message);
 }
 
-int main(void) {
-    pila_t *pila = pila_crear();
-    int a = 2;
-    pila_apilar(pila,&a);
-    printf("%i\n",*(int*)pila_ver_tope(pila));
+int main(int argc, char const *argv[]) {
 
+    if(argc < 4) return 1;
 
-    
+    pila_t *pila_polaca = pila_crear();
+    for(int entrada = 1 ; entrada < argc - 2 ; entrada++){
+        for(int i=0; i < strlen(argv[entrada]) ; i++){
+
+            if(isdigit(argv[entrada][i]){
+                pila_apilar(pila_polaca,&argv[entrada][i]);
+                break;
+            }
+
+            switch (operat) {
+                case "*":
+                    int producto = pila_desapilar(pila_polaca) * pila_desapilar(pila_polaca);
+                    pila_apilar(pila_polaca,&producto);
+                    break;
+
+                case "/":
+                    int producto = pila_desapilar(pila_polaca) / pila_desapilar(pila_polaca);
+                    pila_apilar(pila_polaca,&producto);
+                    break;
+
+                case "-":
+                    int producto = pila_desapilar(pila_polaca) - pila_desapilar(pila_polaca);
+                    pila_apilar(pila_polaca,&producto);
+                    break;
+
+                case "+":
+                    int producto = pila_desapilar(pila_polaca) + pila_desapilar(pila_polaca);
+                    pila_apilar(pila_polaca,&producto);
+                    break;
+            }
+        }
+        printf("%i\n",pila_desapilar(pila_polaca) );
+    }
+
     return 0;
 }
