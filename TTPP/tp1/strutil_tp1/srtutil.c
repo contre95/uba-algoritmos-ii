@@ -2,21 +2,35 @@
 #include <string.h>
 
 
-char * create_dinamic_string(size_t string_lenght){
-    char *string = malloc(size_of(char) * string_lenght);
-    return string
-}
-
 char** split(const char* str, char sep){
-    char *string_array = malloc(size_of(char) * strlen(str));
-    char character = str[0];
-    int i = 0;
-    char string[] = "";
-    while(character != '\0'){
-        if(str[i]==sep){
-
-        }
-        string+=str[i];
+    cant_pal = 1;
+    for (size_t i = 0; i < strlen(str) ; i++) {
+        if( str[i]==sep) cant_pal++;
     }
 
+    char *string_array = malloc(size_of(char*) * cant_pal + 1);
+
+    int num_pal = 0
+    char palabra_stack[] = ""
+        for (size_t i = 0; i < strlen(str); i++) {
+            if( str[i]==sep){
+                char *palabra = malloc(size_of(char) * strlen(palabra_stack));
+                string_array[num_pal] = palabra;
+                palabra_stack = "";
+                num_pal++;
+            }else{
+                strcat(palabra,str[i]);
+            }
+        }
+        string_array[cant_pal+1] = NULL;
+        return string_array;
+}
+
+void free_strv(char* strv[]){
+    int i = 0;
+    while (!strv[i]) {
+        free(strv[i]);
+        i++;
+    }
+    free(strv);
 }
