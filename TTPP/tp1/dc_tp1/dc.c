@@ -9,18 +9,18 @@ void error(char *message){
 }
 
 char** split(const char* str, char sep){
-    cant_pal = 1;
+    int cant_pal = 1;
     for (size_t i = 0; i < strlen(str) ; i++) {
         if( str[i]==sep) cant_pal++;
     }
 
-    char *string_array = malloc(size_of(char*) * cant_pal + 1);
+    char *string_array = malloc(sizeof(char*) * cant_pal + 1);
 
-    int num_pal = 0
-    char palabra_stack[] = ""
+    int num_pal = 0;
+    char palabra_stack[] = "";
         for (size_t i = 0; i < strlen(str); i++) {
             if( str[i]==sep){
-                char *palabra = malloc(size_of(char) * strlen(palabra_stack));
+                char *palabra = malloc(sizeof(char) * strlen(palabra_stack));
                 string_array[num_pal] = palabra;
                 palabra_stack = "";
                 num_pal++;
