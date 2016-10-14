@@ -21,11 +21,11 @@ char** split(const char* str, char sep){
         for (size_t i = 0; i < strlen(str); i++) {
             if( str[i]==sep){
                 char *palabra = malloc(sizeof(char) * strlen(palabra_stack));
-                string_array[num_pal] = palabra;
-                palabra_stack = "";
+                string_array[num_pal] = *palabra;
+                palabra_stack[0] = *"";
                 num_pal++;
             }else{
-                strcat(palabra,str[i]);
+                strcat(palabra_stack,str[i]);
             }
         }
         string_array[cant_pal+1] = NULL;
