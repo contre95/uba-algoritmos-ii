@@ -14,14 +14,14 @@ char** split(const char* str, char sep){
         if( str[i]==sep) cant_pal++;
     }
 
-    char *string_array = malloc(sizeof(char*) * cant_pal + 1);
+    char **string_array = malloc(sizeof(char*) * cant_pal + 1);
 
     int num_pal = 0;
     char palabra_stack[] = "";
         for (size_t i = 0; i < strlen(str); i++) {
             if( str[i]==sep){
                 char *palabra = malloc(sizeof(char) * strlen(palabra_stack));
-                string_array[num_pal] = *palabra;
+                string_array[num_pal] = palabra;
                 palabra_stack[0] = *"";
                 num_pal++;
             }else{
