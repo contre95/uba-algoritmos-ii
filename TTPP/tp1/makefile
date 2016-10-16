@@ -2,7 +2,7 @@ EXEC = pruebas
 CC = gcc
 CFLAGS = -Werror -pedantic -std=c99 -g
 
-all: paste more dc
+all: paste more dc strutil
 
 paste: paste_tp1/paste.c
 	$(CC) $(CFLAGS) -o paste paste_tp1/paste.c
@@ -29,10 +29,19 @@ dc_run: dc
 	./dc "2 9 4 + *" "2 3 + 3 *"
 
 dc_valgrind: dc
-	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more dc_tp1/prueba_more.txt 7
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./dc "2 9 4 + *" "2 3 + 3 *"
+
+strutil: strutil_tp1/srtutil.c
+	$(CC) $(CFLAGS) -o strutil strutil_tp1/srtutil.c
+
+strutil_run: strutil
+	./strutil "hola como estas" 5
+
+strtil_valgrind: strutil
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./dc "hola como estas" 5
 
 reset:
-	rm paste more dc
+	rm paste more dc strutil
 
 remove_crap:
 	rm vgcore.* .*.swp .*.swo
