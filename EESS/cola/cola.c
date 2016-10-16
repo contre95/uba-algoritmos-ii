@@ -30,11 +30,10 @@ bool cola_encolar(cola_t *cola, void* valor){
     node->next_node = NULL;
     if(cola_esta_vacia(cola)){
         cola->first_node = node;
-        cola->last_node = node;
     }else{
         cola->last_node->next_node = node;
-        cola->last_node = node;
     }
+    cola->last_node = node;
     return true;
 }
 void* cola_desencolar(cola_t *cola){
