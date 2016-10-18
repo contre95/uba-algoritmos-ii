@@ -22,26 +22,35 @@ char** split(const char* str, char sep){
     char **string_array = malloc(sizeof(char*) * (cant_pal + 1));
 
     int num_pal = 0;
-    char palabra[1000]; // {}
+    size_t carga = 1000;
+    char *palabra = malloc(carga); // {}
     int largo = 0;
 
     for (size_t i = 0; i < strlen(str); i++) {
 
         if( str[i]==sep || i==strlen(str)-1){
-            palabra[largo+1] = '\0';
-            /*
-            string_array[num_pal] = malloc(sizeof(char)*(largo+1));
-            //fijarse si se hizo el malloc
-            strcpy(string_array[num_pal],palabra);*/
+
+            if(i==strlen(str)-1){
+                palabra[largo] = str[i];
+                palabra[largo+1] = '\0';
+                largo += 1;
+            }
             string_array[num_pal] = strdup(palabra);
             largo = 0;
-            memset(palabra,'\0',strlen(palabra));
             num_pal++;
         }else{
-         palabra[largo] = str[i];
-        largo += 1;
+            palabra[largo] = str[i];
+            palabra[largo+1] = '\0';
+            largo ++;
+            carga++;
+            if(carga > ){
+                realloc(palabra,carga*)
+            }
         }
     }
+
+
+    free(palabra);
     string_array[cant_pal] = NULL;
     return string_array;
 }
@@ -77,7 +86,7 @@ int main(int argc, char const *argv[]){
 
     char **array = split(argv[1],' ');
     for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
-        printf("\n%s : %i",array[i],strlen(array[i]));
+        printf("%s : %i\n",array[i],strlen(array[i]));
     }
     join(array,' ');
 
