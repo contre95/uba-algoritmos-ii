@@ -23,7 +23,7 @@ char** split(const char* str, char sep){
 
     int num_pal = 0;
     size_t carga = 0;
-    size_t total = 1000;
+    int total = 100;
     char *palabra = malloc(total); // {}
     int largo = 0;
 
@@ -36,6 +36,7 @@ char** split(const char* str, char sep){
                 palabra[largo+1] = '\0';
                 largo += 1;
             }
+            printf("%s\n",palabra );
             string_array[num_pal] = strdup(palabra);
             largo = 0;
             num_pal++;
@@ -44,8 +45,11 @@ char** split(const char* str, char sep){
             palabra[largo+1] = '\0';
             largo ++;
             carga++;
-            if(carga > total*0.8){
-                realloc(palabra,total*2);
+            if(carga > total-total/5){
+                //printf("%s : %i : %i\n","Aca realloque !",total-total/5,total);
+                char * aux = realloc(palabra,total*2);
+                if (aux) palabra = aux;
+                total*=2;
             }
         }
     }
@@ -68,7 +72,6 @@ void join(char** strv, char sep){
         largo+=strlen(strv[p]);
         p++;
         }
-        printf("\n%s\n",string );
     //    return &string;
 }
 
@@ -84,12 +87,16 @@ void free_strv(char* strv[]){
 }
 
 int main(int argc, char const *argv[]){
+    if(argc <= 1){
+        error("CANTIDAD DE PARAMETROS INVALIDOS !");
+        return 1;
+    }
 
     char **array = split(argv[1],' ');
     for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
         printf("%s : %i\n",array[i],strlen(array[i]));
     }
-    join(array,' ');
+//    join(array,' ');
 
 free_strv(array);
     return 0;
