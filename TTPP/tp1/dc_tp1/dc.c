@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "../strutil_tp1/strutil.h"
+extern int *strdup(const char* s);
+
+
+
 
 int main(int argc, char const *argv[]){
     if(argc <= 1){
@@ -11,32 +15,57 @@ int main(int argc, char const *argv[]){
         return 1;
     }
     char **array = split(argv[1],' ');
-    printf("%s\n","Las operaciones son : " );
-    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
-        printf("%s : %i",array[i],strlen(array[i]));
-    }
-    pila_t pila_polaca = pila_crear();
+    pila_t * pila_polaca = pila_crear();
 
     for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
-        if(*array[i]=='+'){
-            int result = pila_desapilar(pila_polaca) + pila_desapilar(pila_polaca);
-            pila_apilar(pila_polaca,(int)result);
+        char *elemento = array[i];
+        if(*elemento == '-'){
+            int *valor_1 = pila_desapilar(pila_polaca);
+            int *valor_2 = pila_desapilar(pila_polaca);
+            int *result= malloc(sizeof(int));
+            *result = *valor_2 - *valor_1;
+            pila_apilar(pila_polaca,result);
+            free(valor_1);
+            free(valor_2);
         }
-        if(*array[i]=='*'){
-            int result = pila_desapilar(pila_polaca) * pila_desapilar(pila_polaca);
-            pila_apilar(pila_polaca,(int)result);
+        else if(*elemento == '+'){
+            int *valor_1 = pila_desapilar(pila_polaca);
+            int *valor_2 = pila_desapilar(pila_polaca);
+            int *result= malloc(sizeof(int));
+            *result = *valor_2 + *valor_1;
+            pila_apilar(pila_polaca,result);
+            free(valor_1);
+            free(valor_2);
         }
-        if(*array[i]=='-'){
-            int result = pila_desapilar(pila_polaca) - pila_desapilar(pila_polaca);
-            pila_apilar(pila_polaca,(int)result);
+        else if(*elemento == '*'){
+            int *valor_1 = pila_desapilar(pila_polaca);
+            int *valor_2 = pila_desapilar(pila_polaca);
+            int *result= malloc(sizeof(int));
+            *result = *valor_2 * *valor_1;
+            pila_apilar(pila_polaca,result);
+            free(valor_1);
+            free(valor_2);
         }
-        if(*array[i]=='/'){
-            int result = pila_desapilar(pila_polaca) / pila_desapilar(pila_polaca);
-            pila_apilar(pila_polaca,(int)result);
+        else if(*elemento == '/'){
+            int *valor_1 = pila_desapilar(pila_polaca);
+            int *valor_2 = pila_desapilar(pila_polaca);
+            int *result= malloc(sizeof(int));
+            *result = *valor_2 / *valor_1;
+            pila_apilar(pila_polaca,result);
+            free(valor_1);
+            free(valor_2);
         }
-        pila_apilar(pila_polaca,(int)atoi(array[i]));
+        else{
+            int* number= malloc(sizeof(int));
+            *number =  atoi(elemento);
+            pila_apilar(pila_polaca,number);
+        }
     }
-    printf("%i\n",pila_desapilar(pila_polaca));
+
+    int *resultado_final = pila_desapilar(pila_polaca);
+    printf("\n%i\n",*(int*)resultado_final);
+    free(resultado_final);
+    pila_destruir(pila_polaca);
     free_strv(array);
     return 0;
 }
