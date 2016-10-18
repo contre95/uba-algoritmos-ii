@@ -38,7 +38,7 @@ strutil_run: strutil
 	./strutil "hola como estas" 5
 
 strtil_valgrind: strutil
-	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./dc "hola como estas" 5
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./strutil "hola como estas" 5
 
 reset:
 	rm paste more dc strutil
