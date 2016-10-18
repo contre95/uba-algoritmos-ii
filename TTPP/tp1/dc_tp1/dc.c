@@ -3,82 +3,40 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "../strutil_tp1/strutil.h"
 
-char strdup(const char string);
-
-void error(char *message){
-    fprintf(stderr, "%s\n", message);
-}
-
-
-
-int main(int argc, char const *argv[]) {
-
-    for(int i = 0; i < atoi(argv[2]) ; i++){
-    char **array = split(argv[1],' ');
-    printf("%s\n",*array[i]);
-}
-
-    for(int entrada = 1 ; entrada < argc ; entrada++){
-      printf("%s\n",argv[entrada]);
-        for(int i=0; i < strlen(argv[entrada]) ; i++){
-            char n = argv[entrada][i];
-          //  printf("%c\n",n);
-            if(isdigit(n)){
-              int  num = atoi(&n);
-              //printf("apilo el resultado : %i\n",num);
-              pila_apilar(pila_polaca,&num);
-              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-            }
-            if(n=='+'){
-
-                //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-                int *num1 = pila_desapilar(pila_polaca);
-                //printf("%i\n",*num1);
-                //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-                int *num2 = pila_desapilar(pila_polaca);
-                //printf("%i\n",*num2);
-                int resultado = *num1 + *num2;
-                //printf("el resultado es : %i\n",resultado );
-                pila_apilar(pila_polaca,&resultado);
-
-
-          }
-            if(n=='-'){
-              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num1 = *(int*)pila_desapilar(pila_polaca);
-              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num2 = *(int*)pila_desapilar(pila_polaca);
-              int resultado = num1 - num2;
-              //printf("el resultado es : %i\n",resultado );
-              pila_apilar(pila_polaca,&resultado);
-
-          }
-            if(n=='*'){
-              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num1 = *(int*)pila_desapilar(pila_polaca);
-              //printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num2 = *(int*)pila_desapilar(pila_polaca);
-              int resultado = num1 * num2;
-              //printf("el resultado es : %i\n",resultado );
-              pila_apilar(pila_polaca,&resultado);
-
-          }
-            if(n=='/'){
-              printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num1 = *(int*)pila_desapilar(pila_polaca);
-              printf("el tope es: %i\n",*(int*)pila_ver_tope(pila_polaca) );
-              int num2 = *(int*)pila_desapilar(pila_polaca);
-              int resultado = num1 / num2;
-              printf("el resultado es : %i\n",resultado );
-              pila_apilar(pila_polaca,&resultado);
-
-          }
-      }
-
-    int resultado_final = *(int*)pila_desapilar(pila_polaca);
-    printf("%i\n",resultado_final);
+int main(int argc, char const *argv[]){
+    if(argc <= 1){
+        error("CANTIDAD DE PARAMETROS INVALIDOS !");
+        return 1;
     }
-    pila_destruir(pila_polaca);
+    char **array = split(argv[1],' ');
+    printf("%s\n","Las operaciones son : " );
+    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
+        printf("%s : %i",array[i],strlen(array[i]));
+    }
+    pila_t pila_polaca = pila_crear();
+
+    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
+        if(*array[i]=='+'){
+            int result = pila_desapilar(pila_polaca) + pila_desapilar(pila_polaca);
+            pila_apilar(pila_polaca,(int)result);
+        }
+        if(*array[i]=='*'){
+            int result = pila_desapilar(pila_polaca) * pila_desapilar(pila_polaca);
+            pila_apilar(pila_polaca,(int)result);
+        }
+        if(*array[i]=='-'){
+            int result = pila_desapilar(pila_polaca) - pila_desapilar(pila_polaca);
+            pila_apilar(pila_polaca,(int)result);
+        }
+        if(*array[i]=='/'){
+            int result = pila_desapilar(pila_polaca) / pila_desapilar(pila_polaca);
+            pila_apilar(pila_polaca,(int)result);
+        }
+        pila_apilar(pila_polaca,(int)atoi(array[i]));
+    }
+    printf("%i\n",pila_desapilar(pila_polaca));
+    free_strv(array);
     return 0;
 }

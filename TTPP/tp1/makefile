@@ -22,14 +22,16 @@ more_run: more
 more_valgrind: more
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./more more_tp1/prueba_more.txt 7
 
-dc: dc_tp1/dc.c tda/pila/pila.o
-	$(CC) $(CFLAGS) -o dc tda/pila/pila.o dc_tp1/dc.c
+dc: dc_tp1/dc.c tda/pila/pila.o strutil_tp1/srtutil.o
+	$(CC) $(CFLAGS) -o dc tda/pila/pila.o strutil_tp1/srtutil.o dc_tp1/dc.c
 
 dc_run: dc
 	./dc "2 9 4 + *" "2 3 + 3 *"
 
 dc_valgrind: dc
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./dc "2 9 4 + *" "2 3 + 3 *"
+
+strutil_object: strutil_tp1/srtutil.c
 
 strutil: strutil_tp1/srtutil.c
 	$(CC) $(CFLAGS) -o strutil strutil_tp1/srtutil.c

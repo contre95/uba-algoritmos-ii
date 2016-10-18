@@ -3,6 +3,10 @@
 
 #include <stddef.h>
 
+int cant_palabras(const char* str, char sep);
+
+void error(char *message);
+
 /*
  * Devuelve en un arreglo dinÃ¡mico terminado en NULL con todos los subsegmentos
  * de â€˜strâ€™ separados por el carÃ¡cter â€˜sepâ€™. Tanto el arreglo devuelto como las
@@ -27,5 +31,5 @@ char* join(char** strv, char sep);
  * Libera un arreglo dinÃ¡mico de cadenas, y todas las cadenas que contiene.
  */
 void free_strv(char* strv[]);
-
+/* cuenta la cantidad de string segun un separador */
 #endif  // STRUTIL_H
