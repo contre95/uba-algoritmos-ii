@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-//char strdup(const char string);
+extern char *strdup(const char* s);
 
 void error(char *message){
     fprintf(stderr, "%s\n", message);
@@ -26,16 +26,20 @@ char** split(const char* str, char sep){
     int largo = 0;
 
     for (size_t i = 0; i < strlen(str); i++) {
-        palabra[largo] = str[i];
-        largo += 1;
+
         if( str[i]==sep || i==strlen(str)-1){
             palabra[largo+1] = '\0';
+            /*
             string_array[num_pal] = malloc(sizeof(char)*(largo+1));
             //fijarse si se hizo el malloc
-            strcpy(string_array[num_pal],palabra);
+            strcpy(string_array[num_pal],palabra);*/
+            string_array[num_pal] = strdup(palabra);
             largo = 0;
             memset(palabra,'\0',strlen(palabra));
             num_pal++;
+        }else{
+         palabra[largo] = str[i];
+        largo += 1;
         }
     }
     string_array[cant_pal] = NULL;
