@@ -22,8 +22,9 @@ char** split(const char* str, char sep){
     char **string_array = malloc(sizeof(char*) * (cant_pal + 1));
 
     int num_pal = 0;
-    size_t carga = 1000;
-    char *palabra = malloc(carga); // {}
+    size_t carga = 0;
+    size_t total = 1000;
+    char *palabra = malloc(total); // {}
     int largo = 0;
 
     for (size_t i = 0; i < strlen(str); i++) {
@@ -43,8 +44,8 @@ char** split(const char* str, char sep){
             palabra[largo+1] = '\0';
             largo ++;
             carga++;
-            if(carga > ){
-                realloc(palabra,carga*)
+            if(carga > total*0.8){
+                realloc(palabra,total*2);
             }
         }
     }
