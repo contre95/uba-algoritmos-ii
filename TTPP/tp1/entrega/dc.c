@@ -7,13 +7,6 @@
 extern int *strdup(const char* s);
 
 
-int cant_palabras(const char* str, char sep){
-    int cant_pal = 1;
-    for (size_t i = 0; i < strlen(str) ; i++) {
-        if( str[i]==sep) cant_pal++;
-    }
-    return cant_pal;
-}
 
 int main(int argc, char const *argv[]){
     if(argc <= 1){
@@ -23,7 +16,12 @@ int main(int argc, char const *argv[]){
     char **array = split(argv[1],' ');
     pila_t * pila_polaca = pila_crear();
 
-    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
+    int cant_pal = 1;
+    for (size_t i = 0; i < strlen(argv[1]) ; i++) {
+        if( argv[1][i]==' ') cant_pal++;
+    }
+
+    for(int i = 0; i < cant_pal  ; i++){
 
         char *elemento = array[i];
         int *valor_1 = pila_desapilar(pila_polaca);
