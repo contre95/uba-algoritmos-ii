@@ -27,15 +27,14 @@ int main(int argc, char const *argv[]){
         else if(*elemento == '+') *result = *valor_2 - *valor_1;
         else if(*elemento == '/') *result = *valor_2 - *valor_1;
         else if(*elemento == '*') *result = *valor_2 - *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
         else{
             int* number= malloc(sizeof(int));
             *number =  atoi(elemento);
             pila_apilar(pila_polaca,number);
         }
+        pila_apilar(pila_polaca,result);
+        free(valor_1);
+        free(valor_2);
     }
 
     int *resultado_final = pila_desapilar(pila_polaca);
