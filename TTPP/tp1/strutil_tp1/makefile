@@ -2,7 +2,7 @@ EXEC = pruebas
 CC = gcc
 CFLAGS = -Werror -pedantic -std=c99 -g
 
-all: srtutil.o
+all: strutil.o
 
-srtutil.o: srtutil.c strutil.h
-	$(CC) $(CFLAGS) srtutil.c -c
+strutil.o: strutil.c strutil.h
+	$(CC) $(CFLAGS) strutil.c -c

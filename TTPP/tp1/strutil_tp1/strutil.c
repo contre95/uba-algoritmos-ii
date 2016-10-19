@@ -24,7 +24,8 @@ char** split(const char* str, char sep){
     int num_pal = 0;
     size_t carga = 0;
     int total = 100;
-    char *palabra = malloc(total); // {}
+    char *palabra = malloc(total);
+    if(!palabra) return NULL;
     int largo = 0;
 
     for (size_t i = 0; i < strlen(str); i++) {
@@ -37,6 +38,7 @@ char** split(const char* str, char sep){
                 largo += 1;
             }
             string_array[num_pal] = strdup(palabra);
+            if(!string_array[num_pal]) return NULL;
             largo = 0;
             num_pal++;
         }else{
@@ -48,6 +50,7 @@ char** split(const char* str, char sep){
                 //printf("%s : %i : %i : %i\n","Aca realloque !",total-total/5,total,total*2);
                 char * aux = realloc(palabra,total*2);
                 if (aux) palabra = aux;
+                else return NULL;
                 total*=2;
             }
         }
@@ -58,21 +61,30 @@ char** split(const char* str, char sep){
     string_array[cant_pal] = NULL;
     return string_array;
 }
-/*
-void join(char** strv, char sep){
-        char string[1000];
+
+char* join(char** strv, char sep){
+        int i = 0;
+        size_t tam = 0;
+        while(strv[i]){
+            tam+=strlen(strv[i])+1;
+            i++;
+        }
+        char *string = malloc(sizeof(char)*tam);
+        if(!string) return NULL;
         int p = 0;
         int largo = 0;
         while (strv[p]) {
-            for (size_t i = largo; i < strlen(strv[p]) ; i++) {
-                    string[i] = strv[p][i];
+            //printf("%s\n",strv[p]);
+            for (size_t x =0; x < (strlen(strv[p])) ; x++) {
+                    string[largo + x] = strv[p][x];
             }
-        printf("%i\n",largo );
-        largo+=strlen(strv[p]);
+        largo+=( strlen(strv[p]));
         p++;
+        if(p!=i) string[largo] = sep;
+        largo++;
         }
-    //    return &string;
-}*/
+    return string;
+}
 
 void free_strv(char* strv[]){
     int i = 0;
@@ -93,7 +105,10 @@ int main(int argc, char const *argv[]){
     for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
         printf("%s : %i\n",array[i],strlen(array[i]));
     }
-free_strv(array);
+    char * stringg = join(array,'');
+    printf("%s\n",stringg);
+    free(stringg);
+    free_strv(array);
+
     return 0;
-}
-*/
+}*/
