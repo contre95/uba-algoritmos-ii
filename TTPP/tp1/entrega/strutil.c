@@ -55,8 +55,6 @@ char** split(const char* str, char sep){
             }
         }
     }
-
-
     free(palabra);
     string_array[cant_pal] = NULL;
     return string_array;
@@ -78,7 +76,7 @@ char* join(char** strv, char sep){
             for (size_t x =0; x < (strlen(strv[p])) ; x++) {
                     string[largo + x] = strv[p][x];
             }
-        largo+=( strlen(strv[p]));
+        largo+=(int)strlen(strv[p]);
         p++;
         if(p!=i) string[largo] = sep;
         largo++;
