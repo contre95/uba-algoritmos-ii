@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../tda/pila/pila.h"
 
 void error(char *message){
     fprintf(stderr, "%s\n", message);
