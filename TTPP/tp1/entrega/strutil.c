@@ -5,9 +5,6 @@
 #include <ctype.h>
 extern char *strdup(const char* s);
 
-void error(char *message){
-    fprintf(stderr, "%s\n", message);
-}
 
 int cant_palabras(const char* str, char sep){
     int cant_pal = 1;

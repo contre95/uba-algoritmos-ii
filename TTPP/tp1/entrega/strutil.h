@@ -5,7 +5,6 @@
 
 int cant_palabras(const char* str, char sep);
 
-void error(char *message);
 
 /*
  * Devuelve en un arreglo dinÃ¡mico terminado en NULL con todos los subsegmentos

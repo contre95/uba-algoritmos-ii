@@ -11,7 +11,7 @@ extern int *strdup(const char* s);
 
 int main(int argc, char const *argv[]){
     if(argc <= 1){
-        error("CANTIDAD DE PARAMETROS INVALIDOS !");
+        fprintf(stderr, "%s\n", "CANTIDAD DE PARAMETROS INVALIDOS !");
         return 1;
     }
     char **array = split(argv[1],' ');
