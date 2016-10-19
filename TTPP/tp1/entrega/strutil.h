@@ -4,8 +4,6 @@
 #include <stddef.h>
 
 int cant_palabras(const char* str, char sep);
-
-
 /*
  * Devuelve en un arreglo dinÃ¡mico terminado en NULL con todos los subsegmentos
  * de â€˜strâ€™ separados por el carÃ¡cter â€˜sepâ€™. Tanto el arreglo devuelto como las

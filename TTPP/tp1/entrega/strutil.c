@@ -15,6 +15,8 @@ int cant_palabras(const char* str, char sep){
 }
 
 char** split(const char* str, char sep){
+
+    if (!str) return NULL;
     int cant_pal = cant_palabras(str,sep);
 
     char **string_array = malloc(sizeof(char*) * (cant_pal + 1));
@@ -45,15 +47,15 @@ char** split(const char* str, char sep){
             largo ++;
             carga++;
             if(carga > total-total/5){
-                //printf("%s : %i : %i : %i\n","Aca realloque !",total-total/5,total,total*2);
                 char * aux = realloc(palabra,total*2);
                 if (aux) palabra = aux;
                 else return NULL;
                 total*=2;
             }
         }
-    }
+        }
     free(palabra);
+    if(strlen(str)==0) string_array[0][0] = '\0';
     string_array[cant_pal] = NULL;
     return string_array;
 }
