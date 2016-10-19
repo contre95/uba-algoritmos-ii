@@ -13,6 +13,7 @@ int cant_palabras(const char* str, char sep){
     }
     return cant_pal;
 }
+
 char** split(const char* str, char sep){
     int cant_pal = cant_palabras(str,sep);
 

@@ -7,7 +7,13 @@
 extern int *strdup(const char* s);
 
 
-
+int cant_palabras(const char* str, char sep){
+    int cant_pal = 1;
+    for (size_t i = 0; i < strlen(str) ; i++) {
+        if( str[i]==sep) cant_pal++;
+    }
+    return cant_pal;
+}
 
 int main(int argc, char const *argv[]){
     if(argc <= 1){
