@@ -8,7 +8,6 @@ extern int *strdup(const char* s);
 
 
 
-
 int main(int argc, char const *argv[]){
     if(argc <= 1){
         fprintf(stderr, "%s\n", "CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
@@ -17,7 +16,12 @@ int main(int argc, char const *argv[]){
     char **array = split(argv[1],' ');
     pila_t * pila_polaca = pila_crear();
 
-    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
+    int cant_pal = 1;
+    for (size_t i = 0; i < strlen(srgv[1]) ; i++) {
+        if( srgv[1][i]==' ') cant_pal++;
+    }
+
+    for(int i = 0; i < cant_pal ; i++){
         char *elemento = array[i];
         if(*elemento == '-'){
             int *valor_1 = pila_desapilar(pila_polaca);
