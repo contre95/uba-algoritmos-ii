@@ -30,14 +30,16 @@ char** split(const char* str, char sep){
 
     for (size_t i = 0; i < strlen(str); i++) {
 
-        if( str[i]==sep || i==strlen(str)-1){
+        if( str[i]==sep || str[i+1]=='\0'){
 
-            if(i==strlen(str)-1){
-                palabra[largo] = str[i];
+            if(str[i+1]=='\0'){
+                if(str[i]!=sep) palabra[largo] = str[i];
                 palabra[largo+1] = '\0';
                 largo += 1;
             }
             string_array[num_pal] = strdup(palabra);
+            free(palabra);
+            palabra = malloc(total);
             if(!string_array[num_pal]) return NULL;
             largo = 0;
             num_pal++;
@@ -55,7 +57,7 @@ char** split(const char* str, char sep){
         }
         }
     free(palabra);
-    if(strlen(str)==0) string_array[0][0] = '\0';
+//    if(strlen(str)==0) string_array[0][0] = '\0';
     string_array[cant_pal] = NULL;
     return string_array;
 }

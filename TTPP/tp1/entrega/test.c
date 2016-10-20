@@ -11,12 +11,14 @@ int main(int argc, char const *argv[]){
     }
 
     char **array = split(argv[1],' ');
-    for(int i = 0; i < cant_palabras(argv[1],' ')  ; i++){
-        printf("%s : %i\n",array[i],(int)strlen(array[i]));
+    int i = 0;
+    while(array[i]){
+            printf("%s:\n",array[i]);
+            i++;
     }
-    char * stringg = join(array,' ');
-    printf("%s\n",stringg);
-    free(stringg);
+    //char * stringg = join(array,' ');
+    //printf("%s\n",stringg);
+    //free(stringg);
     free_strv(array);
 
     return 0;
