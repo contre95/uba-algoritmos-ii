@@ -18,47 +18,22 @@ int polish(char const *operation){
 
     for(int i = 0; i < cant_pal ; i++){
         char *elemento = array[i];
-        if(*elemento == '-'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 - *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '+'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 + *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '*'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 * *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '/'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 / *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
+        int *valor_1 = pila_desapilar(pila_polaca);
+        int *valor_2 = pila_desapilar(pila_polaca);
+        int *result= malloc(sizeof(int));
+        if(*elemento == '-') *result = *valor_2 - *valor_1;
+        else if(*elemento == '+') *result = *valor_2 + *valor_1;
+        else if(*elemento == '/') *result = *valor_2 / *valor_1;
+        else if(*elemento == '*') *result = *valor_2 * *valor_1;
         else{
             int* number= malloc(sizeof(int));
             *number =  atoi(elemento);
             pila_apilar(pila_polaca,number);
+            continue;
         }
+        pila_apilar(pila_polaca,result);
+        free(valor_1);
+        free(valor_2);
     }
 
     int *resultado_final = pila_desapilar(pila_polaca);
