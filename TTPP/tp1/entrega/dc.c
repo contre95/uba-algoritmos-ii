@@ -18,8 +18,10 @@ int polish(char const *operation){
 
     for(int i = 0; i < cant_pal ; i++){
         char *elemento = array[i];
-        int *valor_1 = pila_desapilar(pila_polaca);
-        int *valor_2 = pila_desapilar(pila_polaca);
+        if (*elemento == '-' || *elemento == '+' || *elemento == '/' || *elemento == '*'){
+            int *valor_1 = pila_desapilar(pila_polaca);
+            int *valor_2 = pila_desapilar(pila_polaca);
+        }
         int *result= malloc(sizeof(int));
         if(*elemento == '-') *result = *valor_2 - *valor_1;
         else if(*elemento == '+') *result = *valor_2 + *valor_1;
