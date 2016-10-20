@@ -5,6 +5,6 @@ CFLAGS += -Wconversion -Wno-sign-conversion -Wbad-function-cast
 all: paste more dc strutil.o test
 
 remove:
-	rm vgcore.* more paste dc test strutil.o dc.o test.o
+	rm vgcore.* more paste dc test test.o
 
 include deps_noenviar.mk
