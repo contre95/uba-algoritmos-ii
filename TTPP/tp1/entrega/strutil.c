@@ -40,7 +40,7 @@ char** split(const char* str, char sep){
             string_array[num_pal] = strdup(palabra);
             free(palabra);
             palabra = malloc(total);
-            if(!string_array[num_pal]) return NULL;
+            if(!string_array[num_pal] || !palabra) return NULL;
             largo = 0;
             num_pal++;
         }else{
