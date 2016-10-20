@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]){
     char **array = split(argv[1],' ');
     int i = 0;
     while(array[i]){
-            printf("%s:\n",array[i]);
+            printf("%s : %i\n",array[i],(int)strlen(array[i]));
             i++;
     }
     //char * stringg = join(array,' ');

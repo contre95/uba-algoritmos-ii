@@ -7,7 +7,7 @@ extern char *strdup(const char* s);
 
 
 int cant_palabras(const char* str, char sep){
-    int cant_pal = 1;
+    int cant_pal = 0;
     for (size_t i = 0; i < strlen(str) ; i++) {
         if( str[i]==sep) cant_pal++;
     }
@@ -19,7 +19,7 @@ char** split(const char* str, char sep){
     if (!str) return NULL;
     int cant_pal = cant_palabras(str,sep);
 
-    char **string_array = malloc(sizeof(char*) * (cant_pal + 1));
+    char **string_array = malloc(sizeof(char*) * (cant_pal + 2));
 
     int num_pal = 0;
     size_t carga = 0;
@@ -27,16 +27,18 @@ char** split(const char* str, char sep){
     char *palabra = malloc(total);
     if(!palabra) return NULL;
     int largo = 0;
+    for (size_t i = 0; i < strlen(str)+1; i++) {
+        if(str[i]==sep && str[i-1]==sep) continue;
 
-    for (size_t i = 0; i < strlen(str); i++) {
-
-        if( str[i]==sep || str[i+1]=='\0'){
-
-            if(str[i+1]=='\0'){
-                if(str[i]!=sep) palabra[largo] = str[i];
+        if( (str[i]==sep || str[i+1]=='\0') ){
+            if(i==0 && str[i]==sep ) continue;
+            if(str[i]!=sep){
+                palabra[largo] = str[i];
                 palabra[largo+1] = '\0';
-                largo += 1;
+                largo++;
+                carga++;
             }
+            if(str[i-1]==sep && str[i]!=str[strlen(str)-1]) continue;
             string_array[num_pal] = strdup(palabra);
             free(palabra);
             palabra = malloc(total);
@@ -55,10 +57,9 @@ char** split(const char* str, char sep){
                 total*=2;
             }
         }
-        }
+    }
     free(palabra);
-//    if(strlen(str)==0) string_array[0][0] = '\0';
-    string_array[cant_pal] = NULL;
+    string_array[num_pal] = NULL;
     return string_array;
 }
 
