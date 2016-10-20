@@ -7,4 +7,4 @@ all: paste more dc strutil.o test
 remove:
 	rm more paste dc test strutil.o dc.o test.o
 
-include deps.mk
+include deps_noenviar.mk
