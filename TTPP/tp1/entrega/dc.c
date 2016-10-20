@@ -6,7 +6,7 @@
 #include "strutil.h"
 extern int *strdup(const char* s);
 
-int polish(const char * operation){
+void polish(const char * operation){
 
     char **array = split(operation,' ');
     pila_t * pila_polaca = pila_crear();
@@ -60,11 +60,11 @@ int polish(const char * operation){
             pila_apilar(pila_polaca,number);
         }
     }
-
     int *resultado_final = pila_desapilar(pila_polaca);
     pila_destruir(pila_polaca);
     free_strv(array);
-    return *resultado_final;
+    printf("%i\n",*resultado_final);
+    free(resultado_final);
 }
 
 int main(int argc, char const *argv[]){
@@ -72,6 +72,6 @@ int main(int argc, char const *argv[]){
         fprintf(stderr, "%s\n", "CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
         return 1;
     }
-    printf("\n%i\n",polish(argv[1]);
+    polish(argv[1]);
     return 0;
 }
