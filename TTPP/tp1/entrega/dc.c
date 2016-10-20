@@ -6,19 +6,14 @@
 #include "strutil.h"
 extern int *strdup(const char* s);
 
+int polish(const char * operation){
 
-
-int main(int argc, char const *argv[]){
-    if(argc <= 1){
-        fprintf(stderr, "%s\n", "CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
-        return 1;
-    }
-    char **array = split(argv[1],' ');
+    char **array = split(operation,' ');
     pila_t * pila_polaca = pila_crear();
 
     int cant_pal = 1;
-    for (size_t i = 0; i < strlen(srgv[1]) ; i++) {
-        if( srgv[1][i]==' ') cant_pal++;
+    for (size_t i = 0; i < strlen(operation[1]) ; i++) {
+        if( operation[1][i]==' ') cant_pal++;
     }
 
     for(int i = 0; i < cant_pal ; i++){
@@ -67,9 +62,17 @@ int main(int argc, char const *argv[]){
     }
 
     int *resultado_final = pila_desapilar(pila_polaca);
-    printf("\n%i\n",*(int*)resultado_final);
     free(resultado_final);
     pila_destruir(pila_polaca);
     free_strv(array);
+    return *resultado_final;
+}
+
+int main(int argc, char const *argv[]){
+    if(argc <= 1){
+        fprintf(stderr, "%s\n", "CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
+        return 1;
+    }
+    printf("\n%i\n",polish(argv[1]);
     return 0;
 }
