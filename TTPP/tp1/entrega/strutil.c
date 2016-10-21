@@ -23,7 +23,7 @@ char** split(const char* str, char sep){
 
     int num_pal = 0;
     size_t carga = 0;
-    int total = 10;
+    int total = 100;
     char *palabra = malloc(total);
     if(!palabra) return NULL;
     palabra[0] = '\0';
@@ -78,13 +78,20 @@ char** split(const char* str, char sep){
 }
 
 char* join(char** strv, char sep){
+        if(!strv[0]){
+            printf("%s\n","entro hiciste magia" );
+            char *string = malloc(sizeof(char));
+            if(!string) return NULL;
+            string[0]='\0';
+            return string;
+        }
         int i = 0;
         int tam = 0;
         while(strv[i]){
             tam+=(int)strlen(strv[i])+1;
             i++;
         }
-        char *string = malloc(sizeof(char)*(tam+1));
+        char *string = malloc(sizeof(char)*(tam));
         if(!string) return NULL;
         int p = 0;
         int largo = 0;
