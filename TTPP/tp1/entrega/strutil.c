@@ -91,6 +91,7 @@ char** split(const char* str, char sep){
             free(palabra);
             palabra = malloc(total);
             if(!string_array[num_pal] || !palabra) return NULL;
+            palabra[0] = '\0';
             largo = 0;
             num_pal++;
         }
