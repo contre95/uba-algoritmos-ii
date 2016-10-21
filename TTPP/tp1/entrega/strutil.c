@@ -30,6 +30,12 @@ char** split(const char* str, char sep){
     int largo = 0;
     size_t len_str = strlen(str);
 
+    if(str[0]=='\0') {
+        string_array[num_pal] = strdup(palabra);
+        if(!string_array[num_pal]) return NULL;
+        num_pal++;
+    }
+
 
     for (size_t i = 0; i < len_str; i++) {
         if(str[i]!=sep){
@@ -87,7 +93,6 @@ char* join(char** strv, char sep){
         int largo = 0;
         while (strv[p]) {
             int len_str = (int)strlen(strv[p]);
-            
             for (int x =0; x < len_str ; x++) {
                 string[largo + x] = strv[p][x];
             }
