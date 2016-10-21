@@ -76,6 +76,7 @@ char** split(const char* str, char sep){
 
         if(str[i]!=sep){
             palabra[largo] = str[i];
+            palabra[largo+1] = '\0';
             largo ++;
             carga++;
             if(carga > total-total/5){
@@ -86,7 +87,6 @@ char** split(const char* str, char sep){
             }
         }
         if (str[i+1]=='\0' || str[i]==sep){
-            palabra[largo+1] = '\0';
             string_array[num_pal] = strdup(palabra);
             free(palabra);
             palabra = malloc(total);
