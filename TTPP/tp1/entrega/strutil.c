@@ -26,14 +26,21 @@ char** split(const char* str, char sep){
     int total = 100;
     char *palabra = malloc(total);
     if(!palabra) return NULL;
+    palabra[0] = '\0';
     int largo = 0;
 
 
+
+/*
     for (size_t i = 0; i < strlen(str); i++) {
 
         //printf("%s\n","no es barra 0" );
-        if(str[i]==sep && str[i-1]==sep) continue;
-
+        if(str[i]==sep && str[i-1]==sep){
+            palabra[0] = '\0';
+            string_array[num_pal] = strdup(palabra);
+            if(!string_array[num_pal]) return NULL;
+            num_pal++;
+        }
         if( (str[i]==sep || str[i+1]=='\0') ){
             if(i==0 && str[i]==sep ) continue;
             if(str[i]!=sep){
@@ -62,6 +69,45 @@ char** split(const char* str, char sep){
             }
         }
     }
+*/
+
+//de aca
+    for (size_t i = 0; i < strlen(str); i++) {
+
+        if(str[i]!=sep){
+            palabra[largo] = str[i];
+            largo ++;
+            carga++;
+            if(carga > total-total/5){
+                char * aux = realloc(palabra,total*2);
+                if (aux) palabra = aux;
+                else return NULL;
+                total*=2;
+            }
+        }
+        if (str[i+1]=='\0' || str[i]==sep){
+            palabra[largo+1] = '\0';
+            string_array[num_pal] = strdup(palabra);
+            free(palabra);
+            palabra = malloc(total);
+            if(!string_array[num_pal] || !palabra) return NULL;
+            largo = 0;
+            num_pal++;
+        }
+
+}
+if(str[strlen(str)-1]==sep){
+    palabra[0] = '\0';
+    string_array[num_pal] = strdup(palabra);
+    free(palabra);
+    palabra = malloc(total);
+    if(!string_array[num_pal] || !palabra) return NULL;
+    largo = 0;
+    num_pal++;
+
+}
+// a aca
+
 
     if(str[0]=='\0') {
         //printf("%s\n","es barra 0" );

@@ -10,7 +10,7 @@ int main(int argc, char const *argv[]){
         return 1;
     }
 
-    char **array = split(argv[1],' ');
+    char **array = split(argv[1],',');
     int i = 0;
     while(array[i]){
             printf("%s : %i\n",array[i],(int)strlen(array[i]));
