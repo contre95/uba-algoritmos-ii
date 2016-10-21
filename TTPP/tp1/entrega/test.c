@@ -18,8 +18,8 @@ int main(int argc, char const *argv[]){
     }
     char * stringg = join(array,'-');
     printf("%s\n",stringg);
-    free(stringg);
     free_strv(array);
+    free(stringg);
 
     return 0;
 }
