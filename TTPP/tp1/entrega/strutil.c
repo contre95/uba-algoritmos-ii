@@ -52,20 +52,17 @@ char** split(const char* str, char sep){
             largo = 0;
             num_pal++;
         }
+    }
 
-}
-if(str[strlen(str)-1]==sep){
-    palabra[0] = '\0';
-    string_array[num_pal] = strdup(palabra);
-    free(palabra);
-    palabra = malloc(total);
-    if(!string_array[num_pal] || !palabra) return NULL;
-    largo = 0;
-    num_pal++;
-
-}
-// a aca
-
+    if(str[strlen(str)-1]==sep){
+        palabra[0] = '\0';
+        string_array[num_pal] = strdup(palabra);
+        free(palabra);
+        palabra = malloc(total);
+        if(!string_array[num_pal] || !palabra) return NULL;
+        largo = 0;
+        num_pal++;
+    }
 
     if(str[0]=='\0') {
         //printf("%s\n","es barra 0" );
@@ -82,25 +79,25 @@ if(str[strlen(str)-1]==sep){
 
 char* join(char** strv, char sep){
         int i = 0;
-        size_t tam = 0;
+        int tam = 0;
         while(strv[i]){
-            tam+=strlen(strv[i])+1;
+            tam+=(int)strlen(strv[i])+1;
             i++;
         }
-        char *string = malloc(sizeof(char)*tam);
+        char *string = malloc(sizeof(char)*(tam));
         if(!string) return NULL;
         int p = 0;
         int largo = 0;
         while (strv[p]) {
-            //printf("%s\n",strv[p]);
-            for (size_t x =0; x < (strlen(strv[p])) ; x++) {
-                    string[largo + x] = strv[p][x];
+            for (size_t x =0; x < strlen(strv[p]) ; x++) {
+                string[largo + x] = strv[p][x];
             }
         largo+=(int)strlen(strv[p]);
         p++;
         if(p!=i) string[largo] = sep;
         largo++;
         }
+    string[largo-1]='\0';
     return string;
 }
 

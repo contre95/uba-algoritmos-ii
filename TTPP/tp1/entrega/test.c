@@ -16,9 +16,9 @@ int main(int argc, char const *argv[]){
             printf("%s : %i\n",array[i],(int)strlen(array[i]));
             i++;
     }
-    //char * stringg = join(array,' ');
-    //printf("%s\n",stringg);
-    //free(stringg);
+    char * stringg = join(array,'-');
+    printf("%s\n",stringg);
+    free(stringg);
     free_strv(array);
 
     return 0;
