@@ -2,7 +2,7 @@
 #include "testing.h"
 #include <stddef.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 
 /* ******************************************************************
  *                   PRUEBAS UNITARIAS ALUMNO
@@ -85,4 +85,9 @@ void pruebas_lista_alumno(void){
     printf("Cant elementos : %i\n",(int)lista_largo(lista_prueba2));
     lista_iter_destruir(iterador);
     lista_destruir(lista_prueba2,NULL);
+
+    lista_t* lista_prueba3 = lista_crear();
+    char * hola = malloc(sizeof(char));
+    lista_insertar_ultimo(lista_prueba3,hola);
+    lista_destruir(lista_prueba3,free);
 }

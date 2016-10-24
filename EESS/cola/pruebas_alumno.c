@@ -2,6 +2,7 @@
 #include "testing.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 /* ******************************************************************
@@ -32,9 +33,13 @@ void pruebas_cola_alumno() {
     int *aa = cola_ver_primero(cola_prueba);
     int *aaa = cola_desencolar(cola_prueba);
     int *bb = cola_desencolar(cola_prueba);
+
     print_test("Veo que el primero sea 2",*aa==2);
     print_test("Veo que al desencolar desencola el 2",*aaa==2);
     print_test("Veo que al desencolar desencola el 2",*bb==3);
-
     cola_destruir(cola_prueba,NULL);
+    cola_t* cola_prueba2 = cola_crear();
+    char * hola = malloc(sizeof(char));
+    cola_encolar(cola_prueba2,hola);
+    cola_destruir(cola_prueba2,free);
 }
