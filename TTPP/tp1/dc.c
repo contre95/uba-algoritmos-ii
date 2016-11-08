@@ -6,6 +6,14 @@
 #include "strutil.h"
 extern int *strdup(const char* s);
 
+
+int operacion(char *elemento,int valor_1,int valor_2){
+    if(*elemento == '-') return valor_2 - valor_1;
+    else if(*elemento == '+') return valor_2 + valor_1;
+    else if(*elemento == '*') return valor_2 * valor_1;
+    else if(*elemento == '/') return valor_2 / valor_1;
+    else return 0;
+}
 void polish(const char * operation){
 
     char **array = split(operation,' ');
@@ -18,38 +26,11 @@ void polish(const char * operation){
 
     for(int i = 0; i < cant_pal ; i++){
         char *elemento = array[i];
-        if(*elemento == '-'){
+        if(*elemento == '-' || *elemento == '/' || *elemento == '*' || *elemento == '+' ){
             int *valor_1 = pila_desapilar(pila_polaca);
             int *valor_2 = pila_desapilar(pila_polaca);
             int *result= malloc(sizeof(int));
-            *result = *valor_2 - *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '+'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 + *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '*'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 * *valor_1;
-            pila_apilar(pila_polaca,result);
-            free(valor_1);
-            free(valor_2);
-        }
-        else if(*elemento == '/'){
-            int *valor_1 = pila_desapilar(pila_polaca);
-            int *valor_2 = pila_desapilar(pila_polaca);
-            int *result= malloc(sizeof(int));
-            *result = *valor_2 / *valor_1;
+            *result = operacion(elemento,*valor_2,*valor_1);
             pila_apilar(pila_polaca,result);
             free(valor_1);
             free(valor_2);
@@ -61,6 +42,10 @@ void polish(const char * operation){
         }
     }
     int *resultado_final = pila_desapilar(pila_polaca);
+    if(!pila_esta_vacia(pila_polaca)){
+        printf("LA OPERACION NO ES CORRECTA !\n");
+        return;
+    }
     pila_destruir(pila_polaca);
     free_strv(array);
     printf("%i\n",*resultado_final);
