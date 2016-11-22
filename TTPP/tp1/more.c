@@ -1,26 +1,31 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "../tda/pila/pila.h"
 
-
+void error(char *message){
+    fprintf(stderr, "%s\n", message);
+}
 int main(int argc, char const *argv[]) {
-
     if(argc != 3){
-        fprintf(stderr, "%s\n", "CANTIDAD DE ARCHIVOS NO ES LA CORRECTA !");
+        error("CANTIDAD DE ARCHIVOS NO ES LA CORR=CTA !");
         return 1;
     }
-
     FILE * file_1 = fopen(argv[1],"r");
-    char single_line_1[1000];
-
+    char * line_1 = NULL;
+    char * line_2 = NULL;
+    size_t capacidad_2 = 0;
+    size_t capacidad_1 = 0;
+    ssize_t longitud_1;
+    ssize_t longitud_2;
     for(int i=0; i < atoi(argv[2]) ; i++){
-        fgets(single_line_1,1000,file_1);
-        fprintf(stdout,"%s",single_line_1);
+        longitud_1 = getline(&line_1,&capacidad_1,file_1);
+        fprintf(stdout,"%s",line_1);
     }
-    char single_line_2[200];
     while(getchar() == '\n' && !feof(file_1)){
-        fgets(single_line_2,1000,file_1);
-        fprintf(stdout,"%s",strtok(single_line_2,"\n"));
+        longitud_2 = getline(&line_2,&capacidad_2,file_1);
+        fprintf(stdout,"%s",strtok(line_2,"\n"));
     }
     fclose(file_1);
     return 0;
