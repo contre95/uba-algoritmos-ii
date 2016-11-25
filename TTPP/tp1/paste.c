@@ -37,9 +37,8 @@ int main(int argc, char const *argv[]) {
     char * linea_2 = NULL;
     size_t capacidad_2 = 0;
     size_t capacidad_1 = 0;
-    ssize_t longitud_1;
-    ssize_t longitud_2;
-    while((longitud_1 = getline(&linea_1,&capacidad_1,file_1) != -1) && (longitud_2 = getline(&linea_2,&capacidad_2,file_2) != -1)){
+
+    while((getline(&linea_1,&capacidad_1,file_1) != -1) && (getline(&linea_2,&capacidad_2,file_2) != -1)){
         fprintf(stdout,"%s\t%s\n",strtok(linea_1,"\n"),strtok(linea_2,"\n"));
         free(linea_1);
         free(linea_2);
