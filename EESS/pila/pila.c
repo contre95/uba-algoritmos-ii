@@ -58,9 +58,8 @@ bool pila_apilar(pila_t *pila, void* valor){
 pila_t* pila_crear(void) {
      pila_t *pila = malloc(sizeof(pila_t));
 
-     if (pila == NULL) {
-         return NULL;
-     }
+     if (pila == NULL) return NULL;
+
      pila->largo = 0;
      pila->tam = TAM0;
      pila->datos = malloc(pila->tam * sizeof(void*));
@@ -77,9 +76,7 @@ pila_t* pila_crear(void) {
 
      // Cuando tam_nuevo es 0, es correcto si se devuelve NULL.
      // En toda otra situación significa que falló el realloc.
-     if (tam_nuevo > 0 && datos_nuevo == NULL) {
-         return false;
-     }
+     if (tam_nuevo > 0 && datos_nuevo == NULL) return false;
 
      pila->datos = datos_nuevo;
      pila->tam = tam_nuevo;
