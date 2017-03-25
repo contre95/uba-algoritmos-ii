@@ -30,7 +30,7 @@ pila_t* pila_crear(void){
         free(pila);
         return NULL;
     }
-    
+
     return pila;
 }
 
@@ -66,19 +66,19 @@ bool pila_apilar(pila_t *pila, void* valor){
 }
 
 void* pila_ver_tope(const pila_t *pila){
-	if (pila->cantidad==0) return NULL;
+	if (pila_esta_vacia(pila)) return NULL;
 
 	return pila->datos[pila->cantidad-1];
 }
 
-int pila_ver_capacidad(const pila_t *pila){
-	return pila->capacidad;
-}
-
 void* pila_desapilar(pila_t *pila){
 
-	if (pila->cantidad==0) return NULL;
-	pila->cantidad--;
+	if (pila_esta_vacia(pila)) return NULL;
 
+  if (pila->cantidad <= (pila->capacidad/2)){
+    pila_redimensionar(pila,pila->capacidad/2);
+  }
+  pila->cantidad--;
+  return pila->datos[pila->cantidad];
 
 }
