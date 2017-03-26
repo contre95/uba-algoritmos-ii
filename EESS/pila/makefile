@@ -13,8 +13,8 @@ genera_pila.o: pila.c pila.h
 run: pruebas
 	./pruebas
 
-remove_vgcore:
-	rm vgcore.*
+remove:
+		rm pila.o pruebas vgcore.*
 
 valgrind: pruebas
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./pruebas
