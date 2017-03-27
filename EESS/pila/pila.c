@@ -55,6 +55,14 @@ bool pila_apilar(pila_t *pila, void* valor){
 }
 
 
+
+
+
+
+
+
+
+
 pila_t* pila_crear(void) {
      pila_t *pila = malloc(sizeof(pila_t));
 
