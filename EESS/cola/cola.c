@@ -19,8 +19,9 @@ cola_t* cola_crear(void){
      return cola;
 }
 bool cola_esta_vacia(const cola_t *cola){
-     return cola->first_node==NULL &&  cola->last_node == NULL;
+     return cola->first_node==NULL;
 }
+
 bool cola_encolar(cola_t *cola, void* valor){
     node_t *node = malloc(sizeof(node_t));
     if (node==NULL){
